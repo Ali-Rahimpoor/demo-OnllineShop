@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import TextTransition, { presets } from "react-text-transition";
 import { CiShoppingCart } from "react-icons/ci";
+import { Link } from "react-router";
 
 const Nav = ()=> {
 
@@ -34,6 +35,7 @@ const Nav = ()=> {
       <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto pl-5 pr-15 flex justify-between items-center">
+          <Link to={'/'}>
           <h1 className="font-Morabba flex items-center justify-between w-41 cursor-pointer text-gray-700 text-2xl">
             <span>فروشگاه </span>
             <span className="text-rose-600">
@@ -42,7 +44,7 @@ const Nav = ()=> {
               </TextTransition>
             </span>
           </h1>
-          
+          </Link>
           <ul className="flex items-center justify-between gap-x-10 font-MorabbaLight">
             <li className="text-gray-700 hover:text-rose-600 transition">خانه</li>
             <li className="text-gray-700 hover:text-rose-600 transition">محصولات</li>
@@ -51,10 +53,12 @@ const Nav = ()=> {
           </ul>
           
           <div>
+              <Link to={'/cart'}>
             <button className="bg-rose-600 font-Morabba flex items-center justify-between text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">
                 <CiShoppingCart size={30} />
                 <span>سبد خرید</span>
             </button>
+                </Link>
           </div>
         </div>
       </nav>

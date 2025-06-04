@@ -1,5 +1,5 @@
-import { Outlet } from "react-router";
-import Nav from "../components/nav"
+import { Link, Outlet } from "react-router";
+import Nav from "../components/Nav"
 const App = () => {
  
 
@@ -19,9 +19,12 @@ const App = () => {
           </h1>
 
           <ul className="flex items-center mt-16 justify-between w-[600px] mx-auto font-Morabba">
+            <Link to={'/products'}>
             <li className="w-30 h-20 text-xl cursor-pointer hover:scale-110 hover:bg-red-200 transition-all flex items-center justify-center border border-gray-300 rounded-2xl">محصولات</li>
-           
+            </Link>
+           <Link to={'/cart'}>
            <li className="w-30 h-20 text-xl cursor-pointer hover:scale-110 hover:bg-red-200 transition-all flex items-center justify-center border border-gray-300 rounded-2xl">سبد خرید</li>
+           </Link>
           </ul>
 
         </header>
