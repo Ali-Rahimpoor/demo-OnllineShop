@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@font-face {
+   font-family: Dana;
+   src: url('./assets/font/Dana/DanaFaNum-Regular.woff2') format("woff2") ;
+}
+@font-face {
+   font-family: DanaMed;
+   src: url('./assets/font/Dana/DanaFaNum-Medium.woff2') format("woff2") ;
+}
+@font-face {
+   font-family: DanaBold;
+   src: url('./assets/font/Dana/DanaFaNum-DemiBold.woff2') format("woff2") ;
+}
+
+@font-face {
+   font-family: Morabba;
+   src: url('./assets/font/Morabba/Morabba-Medium.woff2') format("woff2") ;
+}
+@font-face {
+   font-family: MorabbaLight;
+   src: url('./assets/font/Morabba/Morabba-Light.woff2') format("woff2") ;
+}
+@font-face {
+   font-family: MorabbaBold;
+   src: url('./assets/font/Morabba/Morabba-Bold.woff2') format("woff2") ;
+}
+
+@theme{
+   --font-Dana:Dana;
+   --font-DanaBold:DanaBold;
+   --font-DanaMed:DanaMed;
+
+   --font-Morabba:Morabba;
+   --font-MorabbaBold:MorabbaBold;
+   --font-MorabbaLight:MorabbaLight;
+}
