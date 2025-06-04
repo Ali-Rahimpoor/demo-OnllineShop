@@ -35,3 +35,12 @@
    --font-MorabbaBold:MorabbaBold;
    --font-MorabbaLight:MorabbaLight;
 }
+
+@layer components{
+   .header{
+      background-image: url('./assets/img/Header.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+   }
+}
