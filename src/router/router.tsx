@@ -1,0 +1,21 @@
+import { createBrowserRouter } from "react-router";
+import App from "../pages/App";
+import Products from "../pages/Products";
+import Cart from "../pages/Cart";
+export const router = createBrowserRouter([
+   {
+      path:"/",
+      element:<App/>,
+      errorElement:<div>Err</div>,
+      children:[
+         {
+            path:"/products",
+            element:<Products/>
+         },
+         {
+            path:"/cart",
+            element:<Cart/>
+         }
+      ]
+   }
+]);
