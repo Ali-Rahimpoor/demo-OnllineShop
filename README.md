@@ -1,54 +1,106 @@
-# React + TypeScript + Vite
+# OnlineShop - E-Commerce App (React + TypeScript + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-18.2-%2361DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-%233178C6)
+![Vite](https://img.shields.io/badge/Vite-4.0-%646CFF)
+![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-1.9-%764ABC)
+![React Router](https://img.shields.io/badge/React_Router-6.8-%CA4245)
 
-Currently, two official plugins are available:
+Modern e-commerce application built with cutting-edge frontend technologies for my developer portfolio.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **Product Management**
+  - Browse products with categories
+  - Search and filtering functionality
+  - Product detail pages
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Shopping Experience**
+  - Add/remove items from cart
+  - Quantity adjustment
+  - Checkout process
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **User System**
+  - Login/registration
+  - Protected routes
+  - User profile section
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Technical Highlights**
+  - Type-safe React components
+  - Optimized performance with Vite
+  - Centralized state with Redux Toolkit
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Tech Stack
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+**Core:**
+- React 18
+- TypeScript 5
+- Vite 4
+
+**State & Routing:**
+- Redux Toolkit 1.9
+- React Router 6.8
+
+**Styling:**
+- CSS Modules (or Tailwind CSS if used)
+- Responsive design
+
+## 📦 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ali-Rahimpoor/demo-OnlineShop.git
+
+Styling: TailwindCss
+
+API: Mock API Json-server
+
+Installation
+Clone the repository:
+
+bash
+git clone https://github.com/Ali-Rahimpoor/demo-OnlineShop.git
+Navigate to the project directory:
+
+bash
+cd online-shop
+Install dependencies:
+
+bash
+npm install
+Start the development server:
+
+bash
+npm run dev
+Project Structure
+src/
+├── assets/            # Static assets
+├── components/        # Reusable components
+├── features/          # Redux slices and API logic
+├── hooks/             # Custom hooks
+├── pages/             # Page components
+├── routes/            # Routing configuration
+├── styles/            # Global styles
+├── types/             # TypeScript types
+├── utils/             # Utility functions
+├── App.tsx            # Main App component
+└── main.tsx           # Entry point
+Available Scripts
+npm run dev: Starts the development server
+
+npm run build: Builds the app for production
+
+npm run lint: Runs ESLint
+
+npm run preview: Previews the production build
+
+Demo
+Live Demo (Add link if deployed)
+
+Screenshots
+(Add screenshots if available)
+
+License
+This project is open source and available under the MIT License.
+
+Feel free to contribute or provide feedback! This project was created as part of my portfolio to showcase my skills with modern React development.
