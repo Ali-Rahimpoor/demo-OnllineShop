@@ -4,6 +4,8 @@ import Products_svg from "../assets/svg/Products.svg?react"
 import ReactPaginate from "react-paginate";
 import { useEffect,useState } from "react";
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart, getTotals } from "../features/cartSlice";
 const Products = ()=>{
    const itemsPerPage = 8;
    const {data:normalizeData,isLoading,isError} = useGetProductsQuery();
@@ -27,7 +29,11 @@ const Products = ()=>{
     const newOffset = (event.selected * itemsPerPage) % allProducts.length;
     setItemOffset(newOffset);
   };
-
+  const dispatch = useDispatch();
+  const handleAddToCart = (product) =>{
+   dispatch(addToCart({...product,cartQty:1}));
+   dispatch(getTotals());
+  }
 
    const products = currentItems.map(product=>{
       
@@ -45,7 +51,7 @@ const Products = ()=>{
          </div>
          <div className="flex bg-zinc-800 items-center justify-between">
          <p className="p-2 font-DanaMed text-emerald-500">قیمت : {product.price} ریال</p>
-         <button className="flex bg-rose-500 hover:bg-emerald-500 cursor-pointer rounded-r-full text-white items-center  border-gray-300 p-2 justify-between gap-x-1">
+         <button className="flex bg-rose-500 hover:bg-emerald-500 cursor-pointer rounded-r-full text-white items-center  border-gray-300 p-2 justify-between gap-x-1" onClick={()=>handleAddToCart(product)}>
             <span className="pr-2">سفارش</span>
          <BsCartPlus size={30} />
          </button>

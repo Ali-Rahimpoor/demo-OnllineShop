@@ -21,7 +21,7 @@ const cartSlice = createSlice({
             cartAdapter.addOne(state,action.payload);
          }
       },
-      getTotals(State,action){
+      getTotals(State){
          let {qty,total} = Object.values(State.entities).reduce(
             (cartTotal,cartItem)=>{
                const {price,cartQty} = cartItem;

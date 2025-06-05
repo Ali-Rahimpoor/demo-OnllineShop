@@ -2,13 +2,15 @@ import { useEffect,useState } from "react";
 import TextTransition, { presets } from "react-text-transition";
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import type { RootState } from "../app/store";
 
 const Nav = ()=> {
 
   const TEXTS = ["موبایل", "لپ تاپ", "ساعت",];
   const [index, setIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
-
+  const cartQty = useSelector((state:RootState)=> state.cart.cartTotalQty);
   useEffect(() => {
     const intervalId = setInterval(
       () => setIndex((index) => index + 1),
@@ -57,6 +59,9 @@ const Nav = ()=> {
             <button className="bg-rose-600 font-Morabba flex items-center justify-between text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">
                 <CiShoppingCart size={30} />
                 <span>سبد خرید</span>
+                 <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cartQty ?? 0}
+              </span>
             </button>
                 </Link>
           </div>
