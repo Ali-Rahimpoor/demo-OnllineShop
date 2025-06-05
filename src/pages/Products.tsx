@@ -1,12 +1,36 @@
 import { useGetProductsQuery } from "../features/apiSlice";
 import { BsCartPlus } from "react-icons/bs";
 import Products_svg from "../assets/svg/Products.svg?react"
+import ReactPaginate from "react-paginate";
+import { useEffect,useState } from "react";
+import { useMemo } from "react";
 const Products = ()=>{
+   const itemsPerPage = 8;
    const {data:normalizeData,isLoading,isError} = useGetProductsQuery();
-   
+   const [itemOffset, setItemOffset] = useState(0);   
 
-   const products = normalizeData?.ids.map(id=>{
-      const product = normalizeData.entities[id];
+   const allProducts = useMemo(() => {
+  if (!normalizeData) return [];
+  return normalizeData.ids.map(id => normalizeData.entities[id]);
+}, [normalizeData]);
+
+
+   const endOffset = itemOffset + itemsPerPage;
+  const currentItems = useMemo(()=>allProducts.slice(itemOffset, endOffset),[allProducts, itemOffset, endOffset]) 
+  const pageCount = Math.ceil(allProducts.length / itemsPerPage);
+  
+  useEffect(()=>{
+      setItemOffset(0);
+  },[pageCount])
+  
+   const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % allProducts.length;
+    setItemOffset(newOffset);
+  };
+
+
+   const products = currentItems.map(product=>{
+      
       return(
       <li key={product.id} className="">
          <div className="mt-1 flex flex-col px-4 py-2 border border-gray-200 rounded-t-lg border-b-0">
@@ -49,10 +73,27 @@ const Products = ()=>{
        <h1 className="text-5xl text-center mb-10">محصولات</h1>
       </div>
 
-      <ul className="grid grid-cols-4 gap-5 ">
+      <ul className="grid grid-cols-4 gap-5 container px-10">
          {products}
       </ul>
       </section>
+
+
+      {allProducts.length > itemsPerPage && (
+      <div className="flex justify-center my-6">
+        <ReactPaginate
+          previousLabel={null}
+          nextLabel={false}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"flex gap-2"}
+          pageClassName={"border border-gray-300 px-3 py-1 rounded cursor-pointer"}
+          activeClassName={"bg-blue-500 text-white"}
+          disabledClassName={"opacity-50 cursor-not-allowed"}
+        />
+      </div>)}
+
       </>
    )
 }
