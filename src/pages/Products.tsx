@@ -6,31 +6,35 @@ import { useEffect,useState } from "react";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, getTotals } from "../features/cartSlice";
+import type { IProduct, ICartItem } from "../types/Types";
 const Products = ()=>{
    const itemsPerPage = 8;
+
    const {data:normalizeData,isLoading,isError} = useGetProductsQuery();
+
    const [itemOffset, setItemOffset] = useState(0);   
+   const endOffset = itemOffset + itemsPerPage;
 
    const allProducts = useMemo(() => {
-  if (!normalizeData) return [];
-  return normalizeData.ids.map(id => normalizeData.entities[id]);
-}, [normalizeData]);
+    if (!normalizeData) return [];
+    return normalizeData.ids.map(id => normalizeData.entities[id]);
+   }, [normalizeData]);
 
-
-   const endOffset = itemOffset + itemsPerPage;
+const pageCount = Math.ceil(allProducts.length / itemsPerPage);
+   
   const currentItems = useMemo(()=>allProducts.slice(itemOffset, endOffset),[allProducts, itemOffset, endOffset]) 
-  const pageCount = Math.ceil(allProducts.length / itemsPerPage);
+  
   
   useEffect(()=>{
       setItemOffset(0);
   },[pageCount])
   
-   const handlePageClick = (event) => {
+   const handlePageClick = (event: { selected: number; }) => {
     const newOffset = (event.selected * itemsPerPage) % allProducts.length;
     setItemOffset(newOffset);
   };
   const dispatch = useDispatch();
-  const handleAddToCart = (product) =>{
+  const handleAddToCart = (product: IProduct | ICartItem) =>{
    dispatch(addToCart({...product,cartQty:1}));
    dispatch(getTotals());
   }
