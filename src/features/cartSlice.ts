@@ -1,7 +1,7 @@
 import { createSlice,createEntityAdapter } from "@reduxjs/toolkit";
-import  type{ ICart,ICartItem } from "../types/Types";
+import  type{ICartItem } from "../types/Types";
 import type{ RootState } from "../app/store";
-
+import type { PayloadAction } from "@reduxjs/toolkit";
 const cartAdapter = createEntityAdapter<ICartItem>();
 const initialState = cartAdapter.getInitialState({
    cartTotalAmount:0,
@@ -11,9 +11,9 @@ const initialState = cartAdapter.getInitialState({
 const cartSlice = createSlice({
    name:"cart",
    initialState,
-   reducers:(builder)=>({
-      addToCart(state,action){
-         const productExist = state.entities[action.payload];
+   reducers:()=>({
+      addToCart(state,action:PayloadAction<ICartItem>){
+         const productExist = state.entities[action.payload.id];
 
          if(productExist){
             productExist.cartQty +=1;

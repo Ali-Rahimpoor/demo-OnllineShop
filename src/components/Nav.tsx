@@ -56,10 +56,10 @@ const Nav = ()=> {
           
           <div>
               <Link to={'/cart'}>
-            <button className="bg-rose-600 font-Morabba flex items-center justify-between text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">
+            <button className="bg-rose-600 relative font-Morabba flex items-center justify-between text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition">
                 <CiShoppingCart size={30} />
                 <span>سبد خرید</span>
-                 <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                 <span className="absolute -top-1 -right-1 bg-zinc-900 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cartQty ?? 0}
               </span>
             </button>
