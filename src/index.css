@@ -43,4 +43,10 @@
       background-repeat: no-repeat;
       background-size: cover;
    }
+   .pattern{
+      background-image: url('./assets/img/gold_leaf_seamless.jpg');
+      background-position: center;
+      background-repeat: repeat;
+      background-size: contain;
+   }
 }
