@@ -48,8 +48,12 @@ const Nav = ()=> {
           </h1>
           </Link>
           <ul className="flex items-center justify-between gap-x-10 font-MorabbaLight">
+            <Link to='/'>
             <li className="text-gray-700 hover:text-rose-600 transition">خانه</li>
+            </Link>
+            <Link to={'/products'}>
             <li className="text-gray-700 hover:text-rose-600 transition">محصولات</li>
+            </Link>
             <li className="text-gray-700 hover:text-rose-600 transition">درباره ما</li>
             <li className="text-gray-700 hover:text-rose-600 transition">تماس با ما</li>
           </ul>
