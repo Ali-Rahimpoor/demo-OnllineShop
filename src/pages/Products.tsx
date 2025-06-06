@@ -34,8 +34,9 @@ const pageCount = Math.ceil(allProducts.length / itemsPerPage);
     setItemOffset(newOffset);
   };
   const dispatch = useDispatch();
-  const handleAddToCart = (product: IProduct | ICartItem) =>{
-   dispatch(addToCart({...product,cartQty:1}));
+
+  const handleAddToCart = (product: IProduct) =>{
+   dispatch(addToCart(product));
    dispatch(getTotals());
   }
 
