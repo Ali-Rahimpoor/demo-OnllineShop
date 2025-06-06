@@ -46,8 +46,8 @@ const pageCount = Math.ceil(allProducts.length / itemsPerPage);
    return(
       <>
       <section className="font-Dana">
-      <div className="flex flex-col items-center justify-around">
-         <div className="flex items-center justify-between w-[900px]">
+      <div className="lg:flex flex-col items-center justify-around hidden">
+         <div className="flex items-center justify-between lg:w-[900px]">
               <Products_svg className="size-100" />
               <div className="font-DanaMed flex flex-col gap-y-6">
               <h1 className="text-5xl">از بین محصولات موجود</h1>
@@ -56,10 +56,10 @@ const pageCount = Math.ceil(allProducts.length / itemsPerPage);
               <h4 className="text-4xl">به سبد <span className="text-green-700">خرید</span> اضافه کنید</h4>
               </div>
          </div>
-       <h1 className="text-5xl text-center mb-10">محصولات</h1>
+     
       </div>
-
-      <ul className="grid grid-cols-4 gap-5 container px-10">
+  <h1 className="text-5xl text-center my-10 font-Dana">محصولات</h1>
+      <ul className="grid grid-cols-2 sm:grid-cols-3 2xl:grid-cols-4 gap-5 mx-auto container px-2 lg:px-10">
          <ShowProducts handleAddToCart={handleAddToCart} currentItems={currentItems} />
       </ul>
       </section>

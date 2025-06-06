@@ -12,15 +12,15 @@ const Home = ()=>{
       <>
          <div className="flex items-center justify-center">
                <div className="relative">
-                  <BsArrowDownUp onClick={handelScroll} className="size-25 text-gray-400 hover:text-gray-800" />
+                  <BsArrowDownUp onClick={handelScroll} className="sm:size-25 size-15 mt-3 text-gray-400 hover:text-gray-800" />
                </div>
             </div>
       <section className="font-DanaMed pattern">
          
-         <h1 className="text-6xl text-center text-gray-600 pr-25 mt-20 bg-white/70 py-10">
+         <h1 className="md:text-6xl sm:text-3xl text-xl text-center text-gray-600 mt-20 bg-white/70 py-10">
             <span>محصولات پیشنهادی</span>
          </h1>
-         <div className="container py-20">
+         <div className="container px-10 mx-auto py-5 sm:py-20">
             <Slider/>
          </div>
       </section>

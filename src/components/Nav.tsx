@@ -38,7 +38,7 @@ const Nav = ()=> {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto pl-5 pr-15 flex justify-between items-center">
           <Link to={'/'}>
-          <h1 className="font-Morabba flex items-center justify-between w-41 cursor-pointer text-gray-700 text-2xl">
+          <h1 className="font-Morabba flex items-center justify-between sm:gap-x-0 gap-x-1 sm:w-41 cursor-pointer text-gray-700 text-lg sm:text-2xl">
             <span>فروشگاه </span>
             <span className="text-rose-600">
               <TextTransition springConfig={presets.stiff}>
@@ -47,7 +47,7 @@ const Nav = ()=> {
             </span>
           </h1>
           </Link>
-          <ul className="flex items-center justify-between gap-x-10 font-MorabbaLight">
+          <ul className="md:flex hidden items-center justify-between gap-x-10 font-MorabbaLight">
             <Link to='/'>
             <li className="text-gray-700 hover:text-rose-600 transition">خانه</li>
             </Link>

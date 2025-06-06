@@ -20,12 +20,12 @@ const ShowProducts = ({currentItems,handleAddToCart}:ShowProductsProps)=>{
             alt={product.name}
             loading="lazy"
             />
-            <h3 className="text-2xl font-DanaMed pr-3">{product.name}</h3>
-            <p className="line-clamp-3 text-gray-600 text-balance">{product.description}</p>
+            <h3 className="sm:text-2xl text-lg font-DanaMed pr-3">{product.name}</h3>
+            <p className="line-clamp-3 sm:text-base text-xs text-gray-600 text-balance">{product.description}</p>
             </div>
-            <div className="flex bg-zinc-800 items-center justify-between">
-            <p className="p-2 font-DanaMed text-emerald-500">قیمت : {formatPrice(product.price)}</p>
-            <button className="flex bg-rose-500 hover:bg-emerald-500 cursor-pointer rounded-r-full text-white items-center  border-gray-300 p-2 justify-between gap-x-1" onClick={()=>handleAddToCart(product)}>
+            <div className="flex lg:flex-row flex-col bg-zinc-800 items-end lg:items-center justify-between">
+            <p className="p-2 font-DanaMed sm:text-base text-xs text-emerald-500">قیمت : {formatPrice(product.price)}</p>
+            <button className="flex sm:text-base text-sm bg-rose-500 hover:bg-emerald-500 cursor-pointer rounded-r-full text-white items-center  border-gray-300 p-2 justify-between gap-x-1" onClick={()=>handleAddToCart(product)}>
                <span className="pr-2">سفارش</span>
             <BsCartPlus size={30} />
             </button>
