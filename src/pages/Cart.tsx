@@ -8,6 +8,7 @@ import Order_svg from "../assets/svg/order.svg?react";
 import Buy_svg from "../assets/svg/Buy.svg?react";
 import type { RootState } from "../app/store";
 import { MdDeleteSweep } from "react-icons/md";
+import { formatPrice } from "../helper/RialConvertor";
 const img_url = "/server/images/"
 const Cart = () => {
   const cartItems = useSelector(selectAll);
@@ -83,8 +84,8 @@ const Cart = () => {
         <Buy_svg className="size-70" />
         <div className="flex justify-between items-center px-1">
         <div>
-          <h1 className="font-Morabba text-xl">هزینه کل</h1>
-          <p>{totalAmount}</p>
+          <h1 className="font-Morabba text-xl text-emerald-600">هزینه کل</h1>
+          <p className="font-DanaMed text-emerald-600">{formatPrice(totalAmount)}</p>
           <h1 className="font-Morabba text-xl">تعداد کل</h1>
           <p>{totalQty}</p>
         </div>
