@@ -2,6 +2,7 @@ import { createSlice,createEntityAdapter } from "@reduxjs/toolkit";
 import  type{ICartItem, IProduct} from "../types/Types";
 import type{ RootState } from "../app/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { Bounce, toast } from "react-toastify";
 const cartAdapter = createEntityAdapter<ICartItem>();
 const initialState = cartAdapter.getInitialState({
    cartTotalAmount: 0,
@@ -17,8 +18,28 @@ const cartSlice = createSlice({
 
          if(productExist){
             productExist.cartQty +=1;
+            toast.success('تعداد افزایش یافت',{
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,});
          }else{
             cartAdapter.addOne(state,{...action.payload,cartQty:1});
+             toast.success('محصول به سبد خرید اضافه شد',{
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,});
          }
       },
       getTotals(state){

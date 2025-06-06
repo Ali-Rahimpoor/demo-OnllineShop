@@ -6,7 +6,8 @@ import { useEffect,useState } from "react";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart, getTotals } from "../features/cartSlice";
-import type { IProduct, ICartItem } from "../types/Types";
+import type { IProduct} from "../types/Types";
+
 const Products = ()=>{
    const itemsPerPage = 8;
 

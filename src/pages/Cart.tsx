@@ -4,7 +4,8 @@ import { getTotals, selectAll, addToCart,} from "../features/cartSlice";
 import { useEffect } from "react";
 import SVG from "../assets/svg/svg1.svg?react";
 import { IoTrashOutline, IoAddOutline, IoRemoveOutline } from "react-icons/io5";
-import { IoCashOutline } from "react-icons/io5";
+import Order_svg from "../assets/svg/order.svg?react";
+import Buy_svg from "../assets/svg/Buy.svg?react";
 import type { RootState } from "../app/store";
 const img_url = "/server/images/"
 const Cart = () => {
@@ -20,34 +21,37 @@ const Cart = () => {
   if (cartItems.length === 0) {
     return (
       <main>
-        <div className="font-Roboto flex flex-col items-center justify-center mt-10">
-          <h1 className="text-3xl">No Orders</h1>
+        <div className="font-Dana flex flex-row-reverse items-center justify-center mt-3 gap-x-6">
+          <div className="flex flex-col items-center justify-center">
+          <h1 className="text-3xl">سفارشی ندارید</h1>
           <Link to="/products" className="border-b border-gray-200 mt-5 text-gray-500">
-            Go To Products and Order what You want!
+             در بخش محصولات سفارش خود را انجام دهید !
           </Link>
-          <SVG className="sm:size-100 size-70 mt-10 sm:mt-0" />
+          </div>
+          <SVG className="size-90" />
         </div>
       </main>
     );
   }
 
   return (
-    <main className="p-4 font-Roboto">
-      <h2 className="text-4xl font-extrabold my-6 text-center">Your Cart</h2>
-      <section className="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <main className="pr-10 pl-5  container py-2 font-Dana">
+      <h2 className="text-4xl font-extrabold my-6 text-center">سبد خرید شما</h2>
+      <div className="flex justify-between">
+      <section className="grid grid-cols-2 h-[600px] overflow-y-scroll container mx-10 md:grid-cols-3 gap-4">
         {cartItems.map((item) => (
          
-          <div key={item.id} className="border border-gray-300 rounded-xl shadow-md p-4 flex flex-col justify-between">
+          <div key={item.id} className="border h-[300px] border-gray-300 rounded-xl shadow-md p-4 flex flex-col justify-between">
             <img
               src={`${img_url}/${item.image}.webp`}
               alt={item.name}
-              className="w-full h-40 object-contain mb-2"
+              className="w-full scale-110 h-40 object-contain mb-2"
               loading="lazy"
             />
-            <h3 className="text-lg font-semibold mb-1">{item.name}</h3>
+            <h3 className="text-lg font-DanaBold mb-1">{item.name}</h3>
             <div className="flex justify-start gap-x-2 px-1 items-center font-bold text-green-700 mb-3">
-              <span>${item.price.toLocaleString()}</span>
-              <span className="text-sm text-gray-700">Qty: {item.cartQty}</span>
+               <span className="text-sm text-gray-700"> تعداد: {item.cartQty}</span>
+              <span>هزینه : {item.price.toLocaleString()}</span>
             </div>
             <div className="flex justify-between px-2 items-center gap-2 mt-auto">
               <div className="flex items-center justify-between gap-x-5">
@@ -57,7 +61,7 @@ const Cart = () => {
                 <IoRemoveOutline />
               </button>
               <button
-                onClick={() => dispatch(addToCart({ ...item, cartQty: 1 }))}
+                onClick={() => dispatch(addToCart(item))}
                 className="bg-gray-100 p-2 rounded hover:bg-gray-200"
               >
                 <IoAddOutline />
@@ -72,16 +76,22 @@ const Cart = () => {
           </div>
         ))}
       </section>
+      <nav className=" px-4 w-[400px] h-[600px]">
+        <div className="">
+          <Buy_svg className="size-70" />
+        </div>
+        <h1 className="font-Morabba text-xl">هزینه کل</h1>
+        <p>{totalAmount}</p>
+        <h1 className="font-Morabba text-xl">تعداد کل</h1>
+        <p>{totalQty}</p>
 
-      <div className="mt-8 border-t border-t-gray-300 pt-4 flex items-center flex-col justify-center">
-        <p className="text-lg font-Roboto text-green-700">
-           Total Amount: ${Math.round(totalAmount)} 💰
-        </p>
-        <button className="flex items-center gap-x-1 text-lg justify-center mt-2">
-            <span>Buy</span>
-           <IoCashOutline/>
+        <button className="mx-auto block bg-rose-600/60 hover:bg-red-600 text-white p-2 rounded-3xl">
+          <span className="font-MorabbaLight text-xl">پرداخت از طریق درگاه بانکی</span>
+          <Order_svg className="size-40"/>
         </button>
+      </nav>
       </div>
+      
     </main>
   );
 };
