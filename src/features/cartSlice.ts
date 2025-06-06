@@ -57,6 +57,52 @@ const cartSlice = createSlice({
 
             state.cartTotalQty = qty;
             state.cartTotalAmount = total;
+      },
+      decreaseCart(state,action:PayloadAction<number | string>){
+         const product = state.entities[action.payload];
+         if(product){
+         if(product.cartQty > 1){
+               product.cartQty -=1;
+         }else{
+            cartAdapter.removeOne(state,action.payload);
+            toast.warning('محصول حذف شد',{
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,})
+         }
+       }
+      },
+      deleteCart(state,action:PayloadAction<number | string>){
+         cartAdapter.removeOne(state,action.payload);
+         toast.warning('محصول حذف شد',{
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,})
+      },
+      deleteAllCart(state){
+         cartAdapter.removeAll(state);
+         toast.error('همه محصولات حذف شدن !',{
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,})
       }
    }
 });
@@ -65,7 +111,10 @@ export const {selectAll} = cartAdapter.getSelectors((state:RootState)=> state.ca
 
 export const {
    addToCart,
-   getTotals
+   getTotals,
+   decreaseCart,
+   deleteCart,
+   deleteAllCart
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

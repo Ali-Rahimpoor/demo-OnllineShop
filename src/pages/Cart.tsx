@@ -1,12 +1,13 @@
 import { Link } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotals, selectAll, addToCart,} from "../features/cartSlice";
+import { getTotals, selectAll, addToCart, decreaseCart, deleteCart, deleteAllCart,} from "../features/cartSlice";
 import { useEffect } from "react";
 import SVG from "../assets/svg/svg1.svg?react";
 import { IoTrashOutline, IoAddOutline, IoRemoveOutline } from "react-icons/io5";
 import Order_svg from "../assets/svg/order.svg?react";
 import Buy_svg from "../assets/svg/Buy.svg?react";
 import type { RootState } from "../app/store";
+import { MdDeleteSweep } from "react-icons/md";
 const img_url = "/server/images/"
 const Cart = () => {
   const cartItems = useSelector(selectAll);
@@ -56,6 +57,7 @@ const Cart = () => {
             <div className="flex justify-between px-2 items-center gap-2 mt-auto">
               <div className="flex items-center justify-between gap-x-5">
               <button
+                onClick={()=> dispatch(decreaseCart(item.id))}
                 className="bg-gray-100 p-2 rounded hover:bg-gray-200"
               >
                 <IoRemoveOutline />
@@ -69,6 +71,7 @@ const Cart = () => {
               </div>
               <button
                 className="bg-red-100 p-2 rounded hover:bg-red-200 text-red-600"
+                onClick={()=> dispatch(deleteCart(item.id))}
               >
                 <IoTrashOutline />
               </button>
@@ -77,14 +80,22 @@ const Cart = () => {
         ))}
       </section>
       <nav className=" px-4 w-[400px] h-[600px]">
-        <div className="">
-          <Buy_svg className="size-70" />
+        <Buy_svg className="size-70" />
+        <div className="flex justify-between items-center px-1">
+        <div>
+          <h1 className="font-Morabba text-xl">هزینه کل</h1>
+          <p>{totalAmount}</p>
+          <h1 className="font-Morabba text-xl">تعداد کل</h1>
+          <p>{totalQty}</p>
         </div>
-        <h1 className="font-Morabba text-xl">هزینه کل</h1>
-        <p>{totalAmount}</p>
-        <h1 className="font-Morabba text-xl">تعداد کل</h1>
-        <p>{totalQty}</p>
-
+        <button
+        className="font-Morabba flex flex-col hover:text-red-700 items-center"
+        onClick={()=> dispatch(deleteAllCart())}
+        >
+          <MdDeleteSweep className="size-10" />
+          <span>حذف همه</span>
+        </button>
+        </div>
         <button className="mx-auto block bg-rose-600/60 hover:bg-red-600 text-white p-2 rounded-3xl">
           <span className="font-MorabbaLight text-xl">پرداخت از طریق درگاه بانکی</span>
           <Order_svg className="size-40"/>
