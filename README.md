@@ -98,7 +98,14 @@ Demo
 Live Demo (Add link if deployed)
 
 Screenshots
-(Add screenshots if available)
+#### 🏠 Home Page
+![Home Page](public/screenshots/home.png)
+
+#### 📄 Products page
+![Product Detail](public/screenshots/products.png)
+
+#### 🛒 Shopping Cart
+![Cart](public/screenshots/cart.png)
 
 License
 This project is open source and available under the MIT License.
