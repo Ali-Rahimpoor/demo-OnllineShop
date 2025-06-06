@@ -5,8 +5,6 @@ const App = () => {
 
   return (
     <>
-
-
         <header>
           <Nav/>
        
@@ -32,7 +30,6 @@ const App = () => {
         <main>
             <Outlet/>
         </main>
-      
     </>
   );
 };

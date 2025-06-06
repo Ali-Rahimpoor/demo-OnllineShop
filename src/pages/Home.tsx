@@ -2,11 +2,17 @@ import Slider from "../components/Slider.js";
 import { BsArrowDownUp } from "react-icons/bs";
 const Home = ()=>{
 
+   const handelScroll = ()=>{
+      window.scrollTo({
+         behavior:"smooth",
+         top:1000
+      })
+   }
    return(
       <>
          <div className="flex items-center justify-center">
                <div className="relative">
-                  <BsArrowDownUp className="size-25 text-gray-400 hover:text-gray-800" />
+                  <BsArrowDownUp onClick={handelScroll} className="size-25 text-gray-400 hover:text-gray-800" />
                </div>
             </div>
       <section className="font-DanaMed pattern">
