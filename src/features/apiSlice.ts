@@ -26,9 +26,15 @@ export const ProductApi = createApi({
             body: {...newProduct,id:nanoid()},
          })
          
+      }),
+      deleteProduct: builder.mutation({
+         query:({id})=>({
+            url:`products/${id}`,
+            method:"DELETE"
+         })
       })
    })
 })
 
 
-export const {useGetProductsQuery,useGetFilterQuery,useAddProductMutation} = ProductApi;
+export const {useGetProductsQuery,useGetFilterQuery,useAddProductMutation,useDeleteProductMutation} = ProductApi;
