@@ -54,7 +54,9 @@ const Nav = ()=> {
             <Link to={'/products'}>
             <li className="text-gray-700 hover:text-rose-600 transition">محصولات</li>
             </Link>
-            <li className="text-gray-700 hover:text-rose-600 transition">درباره ما</li>
+            <Link to={'/admin'}>
+            <li className="text-gray-700 hover:text-rose-600 transition">ورود ادمین</li>
+            </Link>
             <li className="text-gray-700 hover:text-rose-600 transition">تماس با ما</li>
           </ul>
           

@@ -4,6 +4,8 @@ import Products from "../pages/Products";
 import Cart from "../pages/Cart";
 import Error from "../components/Error";
 import Home from "../pages/Home";
+import Admin from "../pages/Admin";
+import AddProduct from "../components/AddProduct";
 export const router = createBrowserRouter([
    {
       path:"/",
@@ -21,6 +23,17 @@ export const router = createBrowserRouter([
          {
             path:"/cart",
             element:<Cart/>
+         },
+      ],
+   },
+   {
+      path:"/admin",
+      element:<Admin/>,
+      errorElement:<Error/>,
+      children:[
+         {
+            path:'/admin/addProduct',
+            element:<AddProduct/>
          }
       ]
    }

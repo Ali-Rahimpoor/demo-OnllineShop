@@ -14,3 +14,11 @@ export interface IFilter {
   category:string,
   id:string | number;
 }
+
+export interface IProductFormValues {
+  name: string;
+  description: string;
+  price: number;
+  image:string;
+  filter: string;
+}
