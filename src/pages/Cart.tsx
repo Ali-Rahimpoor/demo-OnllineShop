@@ -49,6 +49,11 @@ const Cart = () => {
               alt={item.name}
               className="w-full scale-110 h-40 object-contain mb-2"
               loading="lazy"
+              onError={(e)=>{
+                const imgElement = e.target as HTMLImageElement;
+                imgElement.onerror = null;
+                imgElement.src = "../../public/noImageProduct.png"
+              }}
             />
             <h3 className="text-lg font-DanaBold mb-1">{item.name}</h3>
             <div className="flex xl:flex-row flex-col justify-start gap-x-2 px-1 items-center font-bold text-green-700 mb-3">

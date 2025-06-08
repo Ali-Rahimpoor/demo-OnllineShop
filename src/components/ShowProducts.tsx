@@ -19,6 +19,11 @@ const ShowProducts = ({currentItems,handleAddToCart}:ShowProductsProps)=>{
             className="w-[90%] mx-auto h-[90%] p-3 shadow rounded-xl my-4" 
             alt={product.name}
             loading="lazy"
+            onError={(e)=>{
+               const imgElement = e.target as HTMLImageElement;
+               imgElement.onerror = null;
+               imgElement.src = "../../public/noImageProduct.png"
+            }}
             />
             <h3 className="sm:text-2xl text-lg font-DanaMed pr-3">{product.name}</h3>
             <p className="line-clamp-3 sm:text-base text-xs text-gray-600 text-balance">{product.description}</p>
