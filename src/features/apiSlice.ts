@@ -1,6 +1,6 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createEntityAdapter } from "@reduxjs/toolkit";
-import type{ IProduct } from "../types/Types";
+import type{ IFilter, IProduct } from "../types/Types";
 
 const ProductAdapter = createEntityAdapter<IProduct>();
 
@@ -15,9 +15,12 @@ export const ProductApi = createApi({
          transformResponse: (response: IProduct[])=>{
             return ProductAdapter.setAll(ProductAdapter.getInitialState(),response);
          },
+      }),
+      getFilter: builder.query<IFilter[],void>({
+         query:()=> "/filter",
       })
    })
 })
 
 
-export const {useGetProductsQuery} = ProductApi;
+export const {useGetProductsQuery,useGetFilterQuery} = ProductApi;

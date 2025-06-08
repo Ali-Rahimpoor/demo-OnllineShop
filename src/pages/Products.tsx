@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from "../features/apiSlice";
+import { useGetFilterQuery, useGetProductsQuery } from "../features/apiSlice";
 import Products_svg from "../assets/svg/Products.svg?react";
 import ReactPaginate from "react-paginate";
 import { useEffect,useState } from "react";
@@ -10,20 +10,41 @@ import ShowProducts from "../components/ShowProducts";
 
 const Products = ()=>{
    const itemsPerPage = 8;
+   const [selectedFilter, setSelectedFilter] = useState<string>("همه");
+   const [itemOffset, setItemOffset] = useState(0);   
 
    const {data:normalizeData,isLoading,isError} = useGetProductsQuery();
-
-   const [itemOffset, setItemOffset] = useState(0);   
-   const endOffset = itemOffset + itemsPerPage;
-
-   const allProducts = useMemo(() => {
-    if (!normalizeData) return [];
-    return normalizeData.ids.map(id => normalizeData.entities[id]);
-   }, [normalizeData]);
-
-const pageCount = Math.ceil(allProducts.length / itemsPerPage);
+   const {data:filterData=[]} = useGetFilterQuery();
+   const dispatch = useDispatch();
    
-  const currentItems = useMemo(()=>allProducts.slice(itemOffset, endOffset),[allProducts, itemOffset, endOffset]) 
+
+      const filteredProducts = useMemo(() => {
+  if (!normalizeData) return [];
+  
+  let products = normalizeData.ids.map(id => normalizeData.entities[id]);
+  
+  if (selectedFilter !== "همه") {
+    products = products.filter(product => 
+      product.filter === filterData.find(f => f.category === selectedFilter)?.id
+    );
+  }
+  
+  return products;
+}, [normalizeData, selectedFilter, filterData]);
+
+
+
+   const endOffset = itemOffset + itemsPerPage;
+const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+
+   // const allProducts = useMemo(() => {
+   //  if (!normalizeData) return [];
+   //  return normalizeData.ids.map(id => normalizeData.entities[id]);
+   // }, [normalizeData]);
+
+const currentItems = useMemo(()=>filteredProducts.slice(itemOffset, endOffset),[filteredProducts, itemOffset, endOffset]) 
+
+  
   
   
   useEffect(()=>{
@@ -31,15 +52,18 @@ const pageCount = Math.ceil(allProducts.length / itemsPerPage);
   },[pageCount])
   
    const handlePageClick = (event: { selected: number; }) => {
-    const newOffset = (event.selected * itemsPerPage) % allProducts.length;
+    const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
     setItemOffset(newOffset);
   };
-  const dispatch = useDispatch();
+  
 
   const handleAddToCart = (product: IProduct) =>{
    dispatch(addToCart(product));
    dispatch(getTotals());
   }
+
+
+
 
    if(isLoading)return <div>loading</div>
    if(isError)return <div>Error</div>
@@ -59,12 +83,27 @@ const pageCount = Math.ceil(allProducts.length / itemsPerPage);
      
       </div>
   <h1 className="text-5xl text-center my-10 font-Dana">محصولات</h1>
+     <div className="container mx-auto">
+  <span>فیلتر کردن محصولات:</span>
+  <select 
+    value={selectedFilter}
+    onChange={(e) => setSelectedFilter(e.target.value)}
+    className="mr-2 p-1 border rounded"
+  >
+    <option value="همه">همه</option>
+    {filterData.map((f, index) => (
+      <option key={index} value={f.category}>
+        {f.category}
+      </option>
+    ))}
+  </select>
+</div>
       <ul className="grid grid-cols-2 sm:grid-cols-3 2xl:grid-cols-4 gap-5 mx-auto container px-2 lg:px-10">
          <ShowProducts handleAddToCart={handleAddToCart} currentItems={currentItems} />
       </ul>
       </section>
 
-      {allProducts.length > itemsPerPage && (
+      {filteredProducts.length > itemsPerPage && (
       <div className="flex justify-center my-6">
         <ReactPaginate
           previousLabel={null}
