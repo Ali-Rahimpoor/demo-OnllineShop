@@ -15,7 +15,7 @@ const ShowProducts = ({currentItems,handleAddToCart}:ShowProductsProps)=>{
          <li key={product.id}>
             <div className="mt-1 flex flex-col px-4 py-2 border border-gray-200 rounded-t-lg border-b-0">
             <img 
-            src={`../../server/images/${product.image}.webp`} 
+            src={`../../server/images/${product.image}`} 
             className="w-[90%] mx-auto h-[90%] p-3 shadow rounded-xl my-4" 
             alt={product.name}
             loading="lazy"

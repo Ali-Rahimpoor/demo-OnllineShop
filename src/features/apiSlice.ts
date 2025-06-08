@@ -1,5 +1,5 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { createEntityAdapter } from "@reduxjs/toolkit";
+import { createEntityAdapter, nanoid } from "@reduxjs/toolkit";
 import type{ IFilter, IProduct } from "../types/Types";
 
 const ProductAdapter = createEntityAdapter<IProduct>();
@@ -18,9 +18,17 @@ export const ProductApi = createApi({
       }),
       getFilter: builder.query<IFilter[],void>({
          query:()=> "/filter",
+      }),
+      addProduct: builder.mutation({
+         query:(newProduct)=>({
+            url: "products",
+            method: "POST",
+            body: {...newProduct,id:nanoid()},
+         })
+         
       })
    })
 })
 
 
-export const {useGetProductsQuery,useGetFilterQuery} = ProductApi;
+export const {useGetProductsQuery,useGetFilterQuery,useAddProductMutation} = ProductApi;

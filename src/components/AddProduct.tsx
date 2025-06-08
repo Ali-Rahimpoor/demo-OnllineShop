@@ -1,19 +1,26 @@
 import {Formik,Form,Field,ErrorMessage} from "formik";
 import * as Yup from 'yup';
-import { useGetFilterQuery } from "../features/apiSlice";
+import { useAddProductMutation, useGetFilterQuery } from "../features/apiSlice";
 import type { IProductFormValues } from "../types/Types";
+import { toast } from "react-toastify";
 
 const AddProduct = ()=>{
 
    const validationSchema = Yup.object().shape({
       name: Yup.string().required('نام محصول را اضافه کنید'),
       description: Yup.string().required('توضیحات محصول را اضافه کنید'),
-      price: Yup.number().required('قیمت را مشخص کنید'),
+      price: Yup.number().required('قیمت را مشخص کنید').positive('قیمت باید مثبت باشد'),
       filter: Yup.string().required('نوع محصول را مشخص کنید'),
-      image:Yup.string().required('نام تصویر را وارد کنید')
+      image: Yup.mixed()
+  .required('عکس را انتخاب کنید')
+  .test(
+    'fileFormat',
+    'فرمت عکس نامعتبر است (jpg, jpeg, png, webp)',
+    (value) => Boolean(value && typeof value === 'string' && value.match(/\.(jpg|jpeg|png|webp)$/i))
+  )
    })
    const {data:FilterData=[]} = useGetFilterQuery();
-
+   const [addProduct] = useAddProductMutation();
    return(
       <>
       <section className="flex flex-col items-center justify-center mt-10">
@@ -27,11 +34,18 @@ const AddProduct = ()=>{
           filter:"",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-         //  createContact(values);
+        onSubmit={async(values,{resetForm}) => {
+          try{
+            toast.success('محصول اضافه شد !');
+            resetForm();
+            await addProduct(values).unwrap();
+          }catch(err){
+            alert('2')
+            console.error(err)
+          }
         }}
       >
-        {({ values }) => (
+        {({ values , setFieldValue}) => (
           <Form className="max-w-md mx-auto font-Dana">
             <div className="relative z-0 w-full mb-5 mt-20 group">
               <Field 
@@ -48,7 +62,25 @@ const AddProduct = ()=>{
                 <div className="text-red-500 text-xs">{msg}</div>
               }/>
             </div>  
-
+  <div className="relative z-0 w-full mb-5 group">
+              <Field
+                as="textarea"
+                name="description"
+                rows={3}
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-rose-600 peer"
+                placeholder=" "
+              />
+              <label
+                htmlFor="description"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-rose-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                توضیحات محصول
+              </label>
+              <ErrorMessage
+                name="description"
+                render={(msg) => <div className="text-red-500 text-xs mt-1">{msg}</div>}
+              />
+            </div>
             <div className="grid md:grid-cols-2 md:gap-6">
               <div className="relative z-0 w-full mb-5 group">
                 <Field 
@@ -79,7 +111,7 @@ const AddProduct = ()=>{
                   <option value={''}>انتخاب کنید</option>
                   {
                     FilterData?.map((f,index)=>(
-                      <option key={index} value={f.category}>
+                      <option key={index} value={f.id}>
                         {f.category}
                       </option>
                     ))
@@ -93,22 +125,21 @@ const AddProduct = ()=>{
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-              <Field
+             <input
   name="image"
-  render={({ field, form }) => (
-    <input
-      type="file"
-      accept="image/*"
-      onChange={(event) => {
-        const file = event.currentTarget.files?.[0];
-        if (file) {
-          form.setFieldValue("image", file.name);
-        }
-      }}
-      className="block w-full text-sm text-gray-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-700 transition"
+  type="file"
+  accept="image/*"
+  onChange={(event) => {
+    const file = event.currentTarget.files?.[0];
+    if (file) {
+      setFieldValue("image", file.name);
+    }
+  }}
+  className="block w-full text-sm text-gray-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-700 transition"
 />
-  )}
-/>
+<ErrorMessage name="image" render={msg =>
+  <div className="text-red-500 text-xs">{msg}</div>
+}/>
             </div>
 
             {values.image && (

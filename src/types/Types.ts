@@ -22,3 +22,12 @@ export interface IProductFormValues {
   image:string;
   filter: string;
 }
+
+export interface IAddProduct{
+   name: string;
+  description: string;
+  price: number;
+  image: string;
+  filter: string;
+  id: number | string;
+}
