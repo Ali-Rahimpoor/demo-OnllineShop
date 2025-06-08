@@ -3,10 +3,14 @@ import  type{ICartItem, IProduct} from "../types/Types";
 import type{ RootState } from "../app/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Bounce, toast } from "react-toastify";
+import { loadCartFromLocalStorage } from "../utils/localStorage";
+
 const cartAdapter = createEntityAdapter<ICartItem>();
+const loadedState = loadCartFromLocalStorage();
 const initialState = cartAdapter.getInitialState({
    cartTotalAmount: 0,
    cartTotalQty: 0,
+   ...(loadedState || {})
 });
 
 const cartSlice = createSlice({
