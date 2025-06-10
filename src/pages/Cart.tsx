@@ -45,7 +45,7 @@ const Cart = () => {
          
           <div key={item.id} className="border xl:h-[300px] h-[350px] border-gray-300 rounded-xl shadow-md p-4 flex flex-col justify-between">
             <img
-              src={`${img_url}/${item.image}.webp`}
+              src={`${img_url}/${item.image}`}
               alt={item.name}
               className="w-full scale-110 h-40 object-contain mb-2"
               loading="lazy"

@@ -46,7 +46,7 @@ const AddProduct = ()=>{
         }}
       >
         {({ values , setFieldValue}) => (
-          <Form className="max-w-md mx-auto font-Dana">
+          <Form className="max-w-md mx-auto my-2 font-Dana">
             <div className="relative z-0 w-full mb-5 mt-20 group">
               <Field 
                 type="text" 

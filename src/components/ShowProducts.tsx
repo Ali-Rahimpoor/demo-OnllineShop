@@ -41,7 +41,7 @@ const ShowProducts = ({currentItems,handleAddToCart,isAdmin}:ShowProductsProps)=
             }}
             />
             <h3 className="sm:text-2xl text-lg font-DanaMed pr-3">{product.name}</h3>
-            <p className="line-clamp-3 sm:text-base text-xs text-gray-600 text-balance">{product.description}</p>
+            <p className="line-clamp-3 sm:text-base text-xs h-20 text-gray-600 text-balance">{product.description}</p>
             </div>
             <div className="flex lg:flex-row flex-col bg-zinc-800 items-end lg:items-center justify-between">
             <p className="p-2 font-DanaMed sm:text-base text-xs text-emerald-500">قیمت : {formatPrice(product.price)}</p>

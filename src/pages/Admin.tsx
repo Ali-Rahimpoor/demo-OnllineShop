@@ -1,13 +1,7 @@
-import { useState } from "react";
 import { Link, Outlet } from "react-router";
 
-const Admin = () => {
+const Admin = () => {  
 
-  const [isDeleteShow,setIsDeleteShow] = useState(false);
-  
-  const handleClickDelete = ()=>{
-
-  }
   return (
     <>
       <section className="font-Dana p-4">
@@ -23,21 +17,11 @@ const Admin = () => {
           </li>
 
           <li>
-           { isDeleteShow ?
-           <>
-              <div className="flex items-center justify-between gap-x-4">
-                <input type="text" placeholder="آیدی محصول را وارد کنید" />
-                <button onClick={handleClickDelete}>حذف کردن</button>
-                <button onClick={()=>setIsDeleteShow(!isDeleteShow)}>برگشت</button>
-              </div>
-           </>
-            :
             <Link to={'/admin/editOrDeleteProduct'}>
-            <button onClick={()=>setIsDeleteShow(!isDeleteShow)} className="bg-rose-600 relative font-Morabba flex items-center justify-center text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+            <button className="bg-rose-600 relative font-Morabba flex items-center justify-center text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
               اطلاعات محصولات
             </button>
             </Link>
-           }
           </li>
         </ul>
         <Link to={'/'} className="flex items-center justify-center mt-10 text-red-400">برگشت</Link>

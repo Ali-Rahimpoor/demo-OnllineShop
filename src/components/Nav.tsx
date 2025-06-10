@@ -4,7 +4,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
 import type { RootState } from "../app/store";
-
+import { GrUserAdmin } from "react-icons/gr";
 const Nav = ()=> {
 
   const TEXTS = ["موبایل", "لپ تاپ", "ساعت",];
@@ -72,6 +72,12 @@ const Nav = ()=> {
                 </Link>
           </div>
         </div>
+        <Link to={'/admin'}>
+        <button className="flex md:hidden items-center justify-center p-2 rounded-3xl border-gray-300 border mx-10">
+            <GrUserAdmin/>
+            <span>ورود ادمین</span>
+        </button>
+        </Link>
       </nav>
       </>
    )
