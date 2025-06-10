@@ -11,6 +11,7 @@ Modern e-commerce application built with cutting-edge frontend technologies for 
 ## 🚀 Features
 
 - **Product Management**
+  - have Admin Page => CRUD system !
   - Browse products with categories
   - Search and filtering functionality
   - Product detail pages
@@ -93,9 +94,6 @@ npm run build: Builds the app for production
 npm run lint: Runs ESLint
 
 npm run preview: Previews the production build
-
-Demo
-Live Demo (Add link if deployed)
 
 Screenshots
 #### 🏠 Home Page
