@@ -2,6 +2,8 @@ import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createEntityAdapter, nanoid } from "@reduxjs/toolkit";
 import type{ IFilter, IProduct } from "../types/Types";
 
+
+type productAdapterState = ReturnType<typeof ProductAdapter.getInitialState>;
 const ProductAdapter = createEntityAdapter<IProduct>();
 
 export const ProductApi = createApi({
@@ -9,8 +11,9 @@ export const ProductApi = createApi({
    baseQuery:fetchBaseQuery({
       baseUrl:"http://localhost:8000/"
    }),
+   // in endpoints : query< give , get =>if => void not have to get >(..)
    endpoints: (builder)=>({
-      getProducts: builder.query<ReturnType<typeof ProductAdapter.getInitialState>,void>({
+      getProducts: builder.query<productAdapterState,void>({
          query: ()=> 'products',
          transformResponse: (response: IProduct[])=>{
             return ProductAdapter.setAll(ProductAdapter.getInitialState(),response);
@@ -19,7 +22,7 @@ export const ProductApi = createApi({
       getFilter: builder.query<IFilter[],void>({
          query:()=> "/filter",
       }),
-      addProduct: builder.mutation({
+      addProduct: builder.mutation<IProduct,Omit<IProduct,"id">>({
          query:(newProduct)=>({
             url: "products",
             method: "POST",
@@ -27,7 +30,7 @@ export const ProductApi = createApi({
          })
          
       }),
-      deleteProduct: builder.mutation({
+      deleteProduct: builder.mutation<{success:boolean;id:string},{id:string}>({
          query:({id})=>({
             url:`products/${id}`,
             method:"DELETE"
@@ -47,4 +50,11 @@ export const ProductApi = createApi({
 })
 
 
-export const {useGetProductsQuery,useGetFilterQuery,useAddProductMutation,useDeleteProductMutation,useGetProductQuery,useUpdateProductMutation} = ProductApi;
+export const {
+   useGetProductsQuery,
+   useGetFilterQuery,
+   useAddProductMutation,
+   useDeleteProductMutation,
+   useGetProductQuery,
+   useUpdateProductMutation
+} = ProductApi;
