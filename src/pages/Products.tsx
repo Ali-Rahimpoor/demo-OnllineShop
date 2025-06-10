@@ -99,7 +99,7 @@ const currentItems = useMemo(()=>filteredProducts.slice(itemOffset, endOffset),[
   </select>
 </div>
       <ul className="grid grid-cols-2 sm:grid-cols-3 2xl:grid-cols-4 gap-5 mx-auto container px-2 lg:px-10">
-         <ShowProducts handleAddToCart={handleAddToCart} currentItems={currentItems} />
+         <ShowProducts handleAddToCart={handleAddToCart} isAdmin={false} currentItems={currentItems} />
       </ul>
       </section>
 
